@@ -15,13 +15,12 @@ class Repository(BaseRepository):
 
     items: ItemsRepository
 
-
     def __init__(self, session: AsyncSession) -> None:
         super().__init__(session=session)
         self.items = ItemsRepository(session=session)
 
 
 async def get_repository(
-    session: AsyncSession = Depends(get_async_session)
+    session: AsyncSession = Depends(get_async_session),
 ) -> Repository:
     return Repository(session=session)

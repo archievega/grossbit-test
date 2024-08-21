@@ -1,4 +1,4 @@
-from fastapi import APIRouter, FastAPI
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import ORJSONResponse
 from starlette.routing import Mount
@@ -8,21 +8,19 @@ from cash_machine.repositories.general import Repository
 from cash_machine.database import get_async_session
 
 
-
 def create_app(settings: Settings):
     app = FastAPI(
         title="Grossbit",
         root_path=f"{settings.api.prefix}{settings.api.v1.prefix}",
         default_response_class=ORJSONResponse,
         routes=[
-            # Mount(
-            #     "/static",
-            #     app=StaticFiles(directory="static"),
-            #     name="static",
-            # ),
+            Mount(
+                "/cash_machine/media",
+                app=StaticFiles(directory="/media"),
+                name="media",
+            ),
         ],
     )
-
 
     app.add_middleware(
         CORSMiddleware,

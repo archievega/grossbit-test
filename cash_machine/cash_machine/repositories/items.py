@@ -15,14 +15,14 @@ class ItemsRepository(BaseRepository):
         self._session.add(item)
         await self._session.commit()
         return item
-    
+
     async def get_all(self) -> list[Item]:
         stmt = select(Item)
         result = await self._session.scalars(stmt)
-        
+
         if result is not None:
             items = result.all()
         else:
             items = []
-        
+
         return items
