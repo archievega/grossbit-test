@@ -71,7 +71,7 @@ def create_qr_code(url: str) -> BytesIO:
 
 
 def get_pdf_url(id: str) -> str:
-    return f"http://{settings.run.public_url}{settings.api.prefix}{settings.api.v1.prefix}/media/{id}"
+    return f"http://{settings.run.public_url}/media/{id}"
 
 
 @router.post("/")
